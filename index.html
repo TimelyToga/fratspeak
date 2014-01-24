@@ -8,20 +8,31 @@
     var markovSpain, markovSherlock;
     window.onload = function() {
       // x = new markov(text, type, regex);
-      markovSherlock = new markov(corpus, "string", /([.,?"();\-!':—^\w]+ ){3}/g); //sherlock holmes corpus
+      markov2 = new markov(corpus, "string", /([.,?"();\-!':—^\w]+ ){2}/g); 
+	  markov3 = new markov(corpus, "string", /([.,?"();\-!':—^\w]+ ){3}/g); 
+	  markov4 = new markov(corpus, "string", /([.,?"();\-!':—^\w]+ ){4}/g); 
+	  markov5 = new markov(corpus, "string", /([.,?"();\-!':—^\w]+ ){5}/g); 
       
-      var mSh = "";
+      var finaled = "";
       var outString = "";
 	  var temp = "";
-      for (var i = 0; i < 2; i++) {
-        temp = markovSherlock.gen(5).trim() + ".";
+      for (var i = 0; i < 10; i++) {
+        temp = markov2.gen(3).trim() + "." + "<p>";
 		var temp1 = temp[0].toUpperCase() + temp.slice(1);
-		mSh += temp1;
+		finaled += "2 " + temp1;
+		temp = markov3.gen(3).trim() + "."+ "<p>";
+		var temp1 = temp[0].toUpperCase() + temp.slice(1);
+		finaled += "3 " + temp1;
+		temp = markov4.gen(3).trim() + "."+ "<p>";
+		var temp1 = temp[0].toUpperCase() + temp.slice(1);
+		finaled += "4 " + temp1;
+		temp = markov5.gen(3).trim() + "."+ "<p>";
+		var temp1 = temp[0].toUpperCase() + temp.slice(1);
+		finaled += "5 " + temp1;
       }
     
       outString += "<h1>what the kids in greek life are saying</h1>";
-      //outString += "<h3>Some of Sherlock Holmes becomes:</h3>";
-      outString += mSh;
+      outString += finaled;
       
       document.write(outString);
     }
