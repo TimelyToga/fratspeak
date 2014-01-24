@@ -1,44 +1,47 @@
 <html>
 <head>
+  <link rel="stylesheet" href="bootstrap.min.css">
+
   <title>Markov Sample</title>
   <script type="text/javascript" src="markov.js"></script>
   <script type="text/javascript" src="json2.js"></script>
   <script type="text/javascript" src="corpus.js"></script>
   <script type="text/javascript">
     var markovSpain, markovSherlock;
-    window.onload = function() {
-      // x = new markov(text, type, regex);
-      markov2 = new markov(corpus, "string", /([.,?"();\-!':—^\w]+ ){2}/g); 
+	window.onload = doFunction();
+	function doFunction() {
+	  var firstTime = true;
+      // x = new markov(text, type, regex); 
 	  markov3 = new markov(corpus, "string", /([.,?"();\-!':—^\w]+ ){3}/g); 
 	  markov4 = new markov(corpus, "string", /([.,?"();\-!':—^\w]+ ){4}/g); 
-	  markov5 = new markov(corpus, "string", /([.,?"();\-!':—^\w]+ ){5}/g); 
       
       var finaled = "";
       var outString = "";
 	  var temp = "";
-      for (var i = 0; i < 10; i++) {
-        temp = markov2.gen(3).trim() + "." + "<p>";
-		var temp1 = temp[0].toUpperCase() + temp.slice(1);
-		finaled += "2 " + temp1;
-		temp = markov3.gen(3).trim() + "."+ "<p>";
-		var temp1 = temp[0].toUpperCase() + temp.slice(1);
-		finaled += "3 " + temp1;
-		temp = markov4.gen(3).trim() + "."+ "<p>";
-		var temp1 = temp[0].toUpperCase() + temp.slice(1);
-		finaled += "4 " + temp1;
-		temp = markov5.gen(3).trim() + "."+ "<p>";
-		var temp1 = temp[0].toUpperCase() + temp.slice(1);
-		finaled += "5 " + temp1;
+	  var temp1 = "";
+      for (var i = 0; i < 1; i++) {
+		temp = markov3.gen(4).trim() + "."+ "<p>";
+		temp1 = temp[0].toUpperCase() + temp.slice(1).toLowerCase();
+		finaled += temp1;
       }
-    
       outString += "<h1>what the kids in greek life are saying</h1>";
       outString += finaled;
       
-      document.write(outString);
+	  document.getElementById("output").innerHTML = outString;
+
+      //document.write(outString);
     }
+	function eraseText() {
+    document.getElementById("output").value = "";
+	}
   </script>
 </head>
 <body>
-TEXT
+	<div class="container">
+		<div class="jumbotron">
+			<p id="output"></p>
+			<button type="button" class="btn btn-lg btn-success" onclick="javascript:doFunction();">Tell me More...</button>
+		</div>
+	</div>
 </body>
 </html>
